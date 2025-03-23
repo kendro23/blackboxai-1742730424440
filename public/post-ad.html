@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Anuncio - PhotoDirectory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add Dropzone CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#ff4d6d',
+                        secondary: '#2b2d42',
+                        accent: '#8d99ae',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .dropzone {
+            border: 2px dashed #ff4d6d;
+            border-radius: 0.5rem;
+            background: white;
+        }
+        .dropzone:hover {
+            border-color: #ff4d6d;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold text-primary">PhotoDirectory</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md">Inicio</a>
+                    <a href="#" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md">Anuncios</a>
+                    <a href="#" class="text-gray-600 hover:text-primary px-3 py-2 rounded-md">Categorías</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Post Ad Form -->
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">Publicar Anuncio</h1>
+            
+            <form id="post-ad-form" class="space-y-6">
+                <!-- Basic Information -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Información Básica</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Título del Anuncio*
+                            </label>
+                            <input type="text" 
+                                   name="title" 
+                                   required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Categoría*
+                            </label>
+                            <select name="category" 
+                                    required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                                <option value="">Seleccionar categoría</option>
+                                <option value="masajes">Masajes</option>
+                                <option value="escorts">Escorts</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Ubicación</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Ciudad*
+                            </label>
+                            <input type="text" 
+                                   name="city" 
+                                   required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Distrito*
+                            </label>
+                            <input type="text" 
+                                   name="district" 
+                                   required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Descripción</h2>
+                    <textarea name="description" 
+                              rows="6" 
+                              required
+                              class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary"
+                              placeholder="Describe tu servicio..."></textarea>
+                </div>
+
+                <!-- Price -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Precio</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Precio (S/.)*
+                            </label>
+                            <input type="number" 
+                                   name="price" 
+                                   required
+                                   min="0"
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Información de Contacto</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Teléfono*
+                            </label>
+                            <input type="tel" 
+                                   name="phone" 
+                                   required
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                WhatsApp
+                            </label>
+                            <input type="tel" 
+                                   name="whatsapp" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary focus:border-primary">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Images -->
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Imágenes</h2>
+                    <div id="image-upload" class="dropzone"></div>
+                    <p class="text-sm text-gray-500 mt-2">
+                        Arrastra y suelta tus imágenes aquí o haz clic para seleccionarlas. Máximo 10 imágenes.
+                    </p>
+                </div>
+
+                <!-- Terms -->
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input type="checkbox" 
+                               required
+                               class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                    </div>
+                    <div class="ml-3">
+                        <label class="text-sm text-gray-700">
+                            Acepto los <a href="#" class="text-primary hover:text-opacity-80">términos y condiciones</a>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end">
+                    <button type="submit" 
+                            class="bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                        Publicar Anuncio
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">PhotoDirectory</h3>
+                    <p class="text-gray-300">
+                        Tu directorio de servicios de confianza
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-white">Inicio</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Anuncios</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Categorías</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contacto</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <a href="mailto:info@photodirectory.com" class="text-gray-300 hover:text-white">
+                                info@photodirectory.com
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span class="text-gray-300">+51 123 456 789</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    © 2023 PhotoDirectory. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="/js/post-ad.js"></script>
+</body>
+</html>
